@@ -1,0 +1,64 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.seat{
+	padding: 1px 1px;
+}
+.rowseat{
+	padding: 10px 20px 0px 0px;
+}
+.nofree{
+	color: red;
+	border-color: red;
+	width: 17px;
+	height: 17px;
+	background-color: red;
+}
+.price_info{
+	padding: 10px 0px 0px 0px;
+}
+.price_type_3{
+	color: yellowgreen;
+}
+.price_type_2{
+	color: blue;
+}
+.price_type_1{
+	color: green;
+}
