@@ -1,6 +1,6 @@
 book:
-    resource: "@BookBundle/Resources/config/routing.yml"
-    prefix:   /
+    resource: '@BookBundle/Controller/'
+    type: annotation
 
 app:
     resource: '@AppBundle/Controller/'
