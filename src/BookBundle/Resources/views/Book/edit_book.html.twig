@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+			book
+			
+			<h1>Book edit</h1>
+
+		    {{ form_start(edit_form) }}
+		        {{ form_widget(edit_form) }}
+		        <input class="btn btn-default" type="submit" value="Edit" />
+		        <a class="btn btn-primary" href="{{ path('book_homepage') }}">Back to the list</a>
+		    {{ form_end(edit_form) }}
+
+			{{ form_start(delete_form) }}
+			        <input type="submit" value="Delete">
+			{{ form_end(delete_form) }}
+		
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}

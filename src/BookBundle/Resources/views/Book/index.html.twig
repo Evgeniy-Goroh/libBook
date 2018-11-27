@@ -5,20 +5,51 @@
         <div id="container">
 			book
 			
-			<section class="jumbotron text-center">
-		        <div class="container">
-		          <h1 class="jumbotron-heading">Album example</h1>
-		          <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
-		          <p>
-		            <a href="#" class="btn btn-primary my-2">Main call to action</a>
-		            <a href="#" class="btn btn-secondary my-2">Secondary action</a>
-		          </p>
-		        </div>
-		    </section>
-		
-        </div>
-    </div>
-{% endblock %}
+			<h1>Books list</h1>
+
+			{% if is_granted('ROLE_ADMIN') %}
+			        <a class="btn btn-default" href="new">Create a new book</a>
+			{% endif %}
+
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			        <a class="btn btn-default" href="{{ path('fos_user_security_logout') }}">Logout</a>
+			    {% else %}
+			        <a class="btn btn-default" href="{{ path('fos_user_security_login') }}">Login</a>
+			{% endif %}
+			
+		    <div class="row books">
+			        {% for book in books %}
+			            <div class ="col-xs-6 col-md-2">
+			                <div class="book">
+			                    <div class="cover">
+			                    
+			                    	{% if book.cover %}
+										<img {{ getImage(asset('uploads/covers/') ~ book.cover, 150, 150) }}/>
+									{% endif %}
+									
+			                    </div>
+			                    
+			                    <p class="id">{{ book.id }}</p>
+			                    <p class="name">{{ book.name }}</p>
+			                    <p class="author">{{ book.author }}</p>
+			                    <p>{% if book.readIt %}{{ book.readIt|date('Y-m-d') }}{% endif %}</p>
+			                    
+			                    {% if book.file and (book.allowDownload or is_granted('ROLE_ADMIN'))%}
+                        			<a class="btn btn-primary btn-xs" href="{{asset('uploads/files/') ~ book.file}}" download >download</a>
+								{% endif %}
+								
+								{% if is_granted('ROLE_ADMIN') %}
+                        			<a class="btn btn-default btn-xs" href="{{ path('book_edit', { 'id': book.id }) }}">edit</a>
+								{% endif %}
+			                    
+						                </div>
+						            </div>
+						        {% endfor %}
+						</div>
+					
+			        </div>
+			    </div>
+			{% endblock %}
 
 {% block stylesheets %}
 

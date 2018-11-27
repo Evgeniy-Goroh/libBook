@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <div id="container">
+			book
+			
+			<h1>new books</h1>
+
+			{% if is_granted('ROLE_ADMIN') %}
+			        <a class="btn btn-default" href="book">List book</a>
+			{% endif %}
+
+			{% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
+			        <a class="btn btn-default" href="{{ path('fos_user_security_logout') }}">Logout</a>
+			    {% else %}
+			        <a class="btn btn-default" href="{{ path('fos_user_security_login') }}">Login</a>
+			{% endif %}
+			
+			{{ form_start(form) }}
+            {{ form_widget(form) }}
+            	<input class="btn btn-default" type="submit" value="Create" />
+				<a class="btn btn-primary"  href="book">Back to the list</a>
+            {{ form_end(form) }}
+			
+        </div>
+    </div>
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
