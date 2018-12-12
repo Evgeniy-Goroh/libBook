@@ -19,18 +19,27 @@ class BookController extends Controller
      *
      * @Route("/book", name="book_homepage")
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $cache = new FilesystemAdapter();
         $booksAll = $cache->getItem('books.all');
         
         if (!$booksAll->isHit()) {
             $em = $this->getDoctrine()->getManager();
-            $books = $em->getRepository('BookBundle:Book')->findBy([], ['readIt' => 'DESC']);   
+            $books = $em->getRepository('BookBundle:Book')->findBy([], ['readIt' => 'DESC']);
         }
         
-        return $this->render('@Book/Book/index.html.twig', ['books' => $books]);
-          
+        $paginator  = $this->get('knp_paginator');
+        $pagination = $paginator->paginate(
+            $books, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            2/*limit per page*/
+        );
+        
+        return $this->render('@Book/Book/index.html.twig', [
+            'books' => $books,
+            'pagination' => $pagination
+        ]);
     }
     
     /**
@@ -55,7 +64,6 @@ class BookController extends Controller
             'books' => $book,
             'form' => $form->createView()
         ]);
-   
     }
     
     /**
@@ -148,7 +156,6 @@ class BookController extends Controller
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView()
         ]);
-    
     }
     
     /**
@@ -164,6 +171,4 @@ class BookController extends Controller
             ->setMethod('DELETE')
             ->getForm();
     }
-    
-    
 }

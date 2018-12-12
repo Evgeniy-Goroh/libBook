@@ -32,7 +32,4 @@ class DefaultController extends Controller
             'list' => $booksCache,
         ]);
     }
-    
-    
-    
 }

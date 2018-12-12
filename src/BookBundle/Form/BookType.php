@@ -12,16 +12,15 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class BookType extends AbstractType
 {
-    
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('name', TextType::class)
             ->add('author', TextType::class)
             ->add('cover', FileType::class, ['data_class' => null,'required' => false])
-            ->add('file',FileType::class,['data_class' => null,'required' => false])
+            ->add('file', FileType::class, ['data_class' => null,'required' => false])
             ->add('readIt', null, ['widget' => 'single_text'])
-            ->add('allowDownload',CheckboxType::class, ['required' => false]);
+            ->add('allowDownload', CheckboxType::class, ['required' => false]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

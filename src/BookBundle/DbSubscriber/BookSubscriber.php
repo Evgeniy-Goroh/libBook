@@ -5,6 +5,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use BookBundle\Entity\Book;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+
 /**
  * Class BookSubscriber
  * @package BookBundle\DbSubscriber

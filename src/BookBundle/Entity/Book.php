@@ -20,7 +20,7 @@ class Book
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      *
-     * 
+     *
      */
     private $id;
     /**
@@ -28,7 +28,7 @@ class Book
      *
      * @ORM\Column(name="name", type="string", length=40)
      *
-     * 
+     *
      */
     private $name;
     /**
@@ -36,7 +36,7 @@ class Book
      *
      * @ORM\Column(name="author", type="string", length=40)
      *
-     * 
+     *
      */
     private $author;
     

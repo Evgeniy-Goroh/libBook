@@ -20,6 +20,9 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new AppBundle\AppBundle(),
             new BookBundle\BookBundle(),
+            new Knp\Bundle\PaginatorBundle\KnpPaginatorBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
             
         ];
 

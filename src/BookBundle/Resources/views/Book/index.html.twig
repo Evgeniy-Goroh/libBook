@@ -18,39 +18,59 @@
 			{% endif %}
 			
 		    <div class="row books">
-			        {% for book in books %}
-			            <div class ="col-xs-6 col-md-2">
-			                <div class="book">
-			                    <div class="cover">
-			                    
-			                    	{% if book.cover %}
-										<img {{ getImage(asset('uploads/covers/') ~ book.cover, 150, 150) }}/>
-									{% endif %}
-									
-			                    </div>
-			                    
-			                    <p class="id">{{ book.id }}</p>
-			                    <p class="name">{{ book.name }}</p>
-			                    <p class="author">{{ book.author }}</p>
-			                    <p>{% if book.readIt %}{{ book.readIt|date('Y-m-d') }}{% endif %}</p>
-			                    
-			                    {% if book.file and (book.allowDownload or is_granted('ROLE_ADMIN'))%}
-                        			<a class="btn btn-primary btn-xs" href="{{asset('uploads/files/') ~ book.file}}" download >download</a>
-								{% endif %}
-								
-								{% if is_granted('ROLE_ADMIN') %}
-                        			<a class="btn btn-default btn-xs" href="{{ path('book_edit', { 'id': book.id }) }}">edit</a>
-								{% endif %}
-			                    
-						                </div>
-						            </div>
-						        {% endfor %}
-						</div>
-					
-			        </div>
-			    </div>
-			{% endblock %}
+			     
+			     <div class="count">
+				    {{ pagination.getTotalItemCount }}
+				</div>
+				
+				<table>
+					<tr>
+					    <th>{{ knp_pagination_sortable(pagination, 'Id', 'a.id') }}</th>
+					    <th{% if pagination.isSorted('a.name') %} class="sorted"{% endif %}>{{ knp_pagination_sortable(pagination, 'name', 'a.name') }}</th>
+					    <td>{{ knp_pagination_sortable(pagination, 'author', 'a.author') }}</td>
+					    <td>cover</td>
+					    <td>readIt</td>
+					    <td>actions</td>   
+					</tr>
+				
+				{# table body #}
+				{% for books in pagination %}
+					<tr {% if loop.index is odd %}class="color"{% endif %}>
+					    <td>{{ books.id }}</td>
+					    <td>{{ books.name }}</td>
+					    <td>{{ books.author }}</td>
+					    <td>
+						    {% if books.cover %}
+								<img {{ getImage(asset('uploads/covers/') ~ books.cover, 50, 50) }}/>
+							{% endif %}
+					    </td>
+					    <td>{% if books.readIt %}{{ books.readIt|date('Y-m-d') }}{% endif %}</td>
+					    <td>
+					    	{% if books.file and (books.allowDownload or is_granted('ROLE_ADMIN'))%}
+					    		<a class="btn btn-primary btn-xs" href="{{asset('uploads/files/') ~ books.file}}" download >download</a>
+							{% endif %}
+							
+							{% if is_granted('ROLE_ADMIN') %}
+					    		<a class="btn btn-default btn-xs" href="{{ path('book_edit', { 'id': books.id }) }}">edit</a>
+							{% endif %}
+					    </td>  
+					</tr>
+				{% endfor %}
+				</table>
+				
+			        
+			</div>
+				
+			{# display navigation #}
+			<div class="navigation">
+			    {{ knp_pagination_render(pagination) }}
+			</div>
+						
+		</div>
+	</div>
+{% endblock %}
 
+		
 {% block stylesheets %}
 
 {% endblock %}
